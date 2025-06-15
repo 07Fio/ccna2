@@ -1,0 +1,8 @@
+[csr]
+208.8.8.11
+
+[csr:vars]
+ansible_user=admin
+ansible_password=pass
+ansible_connection=network_cli
+ansible_network_os=ios

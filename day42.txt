@@ -1,0 +1,16 @@
+config t
+no access-list 8
+access-list 8 permit any
+Int Gi 3
+ ip nat Inside
+Int gi 1
+ ip nat Outside
+IP Nat inside source static tcp 192.168.103.21 80 208.8.8.151 8080
+IP Nat inside source static tcp 192.168.103.21 443 208.8.8.151 8443
+IP Nat inside source static tcp 192.168.103.22 80 208.8.8.152 8080
+IP Nat inside source static tcp 192.168.103.22 443 208.8.8.152 8443
+IP Nat inside source static tcp 192.168.103.22 80 208.8.8.153 8080
+IP Nat inside source static tcp 192.168.103.22 443 208.8.8.153 8443
+IP nat inside source list 8 int gi 1 Overload
+end
+show ip nat translation

@@ -1,0 +1,29 @@
+configure terminal
+Enter configuration commands, one per line.  End with CNTL/Z.
+11-Jerome(config)#hostname airowifi
+airowifi(config)#dot11 ssid NetDevOPsWIFI-11Fio
+airowifi(config-ssid)#vlan 11
+airowifi(config-ssid)#authentication open
+airowifi(config-ssid)#authentication key-management wpa
+airowifi(config-ssid)#wpa-psk ascii C1sc0123
+airowifi(config-ssid)#guest-mode
+airowifi(config-ssid)#default Int Dot11Radio 0
+Cannot disable station-role
+
+Interface Dot11Radio0 set to default configuration
+airowifi(config)#default interface gigabitEthernet 0
+%command not allowed, cannot remove bridge-group 1
+Interface GigabitEthernet0 set to default configuration
+airowifi(config)#int dot11radio 0
+airowifi(config-if)#no shut
+airowifi(config-if)#channel 9
+airowifi(config-if)#encryption mode ciphers tkip
+airowifi(config-if)#encryption vlan 11 mode ciphers tkip
+airowifi(config-if)#ssid NetDevOPsWIFI-11Fio
+airowifi(config-if)#exit
+airowifi(config)#interface dot11radio 0.11
+airowifi(config-subif)#encapsulation dot1q 11 native
+airowifi(config-subif)#bridge-group 1
+airowifi(config-subif)#exit
+airowifi(config)#end
+airowifi#
