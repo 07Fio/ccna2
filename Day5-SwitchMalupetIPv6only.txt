@@ -366,7 +366,7 @@ config t
 int fa 0/3
  shut
  no shut
-int fa 0/7
+int fa 0/5
  shut
  no shut
 end
